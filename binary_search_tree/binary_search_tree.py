@@ -50,6 +50,10 @@ class BinarySearchTree:
           self.left.for_each(cb)
         if self.right:
           self.right.for_each(cb)
+
+
+
+
     # DAY 2 Project -----------------------
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
@@ -59,19 +63,50 @@ class BinarySearchTree:
       print(node.value)
       if node.right is not None:
         self.in_order_print(node.right)
+        
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self, node):
-        pass
+        if not node:
+            return
+        queue = Queue()
+        current_node = self
+        queue.enqueue(current_node)
+        while queue.len():
+            current_node = queue.dequeue()
+            print(current_node.value)
+            if current_node.left:
+                queue.enqueue(current_node.left)
+            if current_node.right:
+                queue.enqueue(current_node.right)
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
     def dft_print(self, node):
-        pass
+        if not node:
+            return
+        stack = Stack()
+        current_node = self
+        stack.push(current_node)
+        while stack.len():
+            current_node = stack.pop()
+            print(current_node.value)
+            if current_node.left:
+                stack.push(current_node.left)
+            if current_node.right:
+                stack.push(current_node.right)
     # STRETCH Goals -------------------------
     # Note: Research may be required
     # Print Pre-order recursive DFT
     def pre_order_dft(self, node):
-        pass
+        if not node:
+            return
+        print(node.value)
+        self.pre_order_dft(node.left)
+        self.pre_order_dft(node.right)
     # Print Post-order recursive DFT
     def post_order_dft(self, node):
-        pass
+        if not node:
+            return
+        self.post_order_dft(node.left)
+        self.post_order_dft(node.right)
+        print(node.value)
